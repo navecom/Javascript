@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Docx Ilham Object 26</title>
+
+ </body>
+ <script>
+  let library = [];
+  function addBook(title, creator, year, genre) {
+   const book = {
+    title,
+    creator,
+    year,   
+    genre
+   };
+   book.edit = (titleNew, creatorNew, yearNew, genreNew) => {
+    Object.assign(book, { title: titleNew, creator: creatorNew, year: yearNew, genre: genreNew });
+    document.write(`<br>[ = ] Buku "${book.title}" berhasil diperbarui`);
+   };
+   book.delete = () => {
+    document.write(`<br>[ - ] Buku "${book.title}" berhasil dihapus<br>`);
+    library = library.filter(b => b !== book);
+   };
+   library.push(book);
+   document.write(`[ + ] Buku "${book.title}" berhasil ditambahkan<br>`);
+  }
+
+
+  function displayBooks() {
+   if (library.length === 0) {
+    document.write("Tidak ada buku di perpustakaan<br>");
+    return;
+   }
+   document.write("<br><b>Daftar Buku Perpustakaan :</b><br>");
+   library.forEach((book, index) => {
+    document.write(`${index + 1}. ${book.title} oleh ${book.creator}, ${book.year} - genre : ${book.genre}<br>`);
+   });
+  }
+
+  // Daftar Buku ( Menambahkan Buku ) (Library)
+  addBook("Siksa Kubur", "Putra", 1995, "Horror");
+  addBook("Menanti Waktu Tidur", "Santoso", 2004, "Fiction");
+  addBook("Harry Potter", "Ridho", 2020, "Magic");
+
+  // Mendisplay semua buku
+  displayBooks();
+
+  // Edit Buku menggunakan this
+  library[0].edit("Siksa kubur The Journey", "Putra", 1995, "Horror");
+
+  // Delete Buku menggunakan this
+  library[2].delete();
+
+  // Mendisplay semua buku setelah perubahan
+  displayBooks();
+
+ </script>
+
+</html>
